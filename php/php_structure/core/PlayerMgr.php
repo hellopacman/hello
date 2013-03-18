@@ -1,35 +1,27 @@
 <?
-//玩家管理器
-/*
-2013-03-09	pacman	created  
-
-*/	
-
-class PlayMgr()
+class PlayerMgr
 {
-	//成员变量
-
 	//构造函数
-	function __constructor()
+	function __construct()
 	{
-
+		//初始构造
 	}
 
-	//获取玩家信息
-	//@	userId 玩家id
+	//----获取指定用户信息------
 	function getPlayerInfo($userId)
 	{
-		//查询玩家信息
+		//查询指定用户数据
 		//.....
+
 
 		$ret["name"] = "张三";
 		$ret["sex"] = "男";
 
-
+		return $ret;
 	}
-	
-}
 
-	
+
+
+}
 
 ?>
