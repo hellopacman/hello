@@ -53,9 +53,9 @@ var MyScene = cc.Scene.extend({
         /////////////////////////////
         // 3. add your codes below...
         var spriteFrameCache = cc.SpriteFrameCache.getInstance();
-        spriteFrameCache.addSpriteFrames(s_grossiniPlist);
+        spriteFrameCache.addSpriteFrames(s_riderman_plist);
 
-        this.sprite = cc.Sprite.createWithSpriteFrameName("grossini_dance_01.png");
+        this.sprite = cc.Sprite.createWithSpriteFrameName("rider_man_00.png");
         this.sprite.setPosition(cc.p(winSize.width / 2 + 80, winSize.height / 2));
         this.addChild(this.sprite);
 
@@ -63,12 +63,12 @@ var MyScene = cc.Scene.extend({
         var str = "";
         var frame;
         for (var i = 1; i < 15; i++) {
-            str = "grossini_dance_" + (i < 10 ? ("0" + i) : i) + ".png";
+            str = "rider_man_" + (i < 10 ? ("0" + i) : i) + ".png";
             frame = spriteFrameCache.getSpriteFrame(str);
             animFrames.push(frame);
         }
 
-        var animation = cc.Animation.create(animFrames, 2);
+        var animation = cc.Animation.create(animFrames, 0.2);
         this.sprite.runAction(cc.RepeatForever.create(cc.Animate.create(animation)));
     }
 });
