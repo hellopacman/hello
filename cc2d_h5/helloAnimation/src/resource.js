@@ -1,5 +1,5 @@
 var s_dragon_animation = "res/animation/dragon_animation.png";
-var s_littleHero_plist = "res/animation/littleHero.plist";
+var s_littleHero_animation = "res/animation/littleHero.png";
 
 var g_ressources = [
     //image
@@ -7,7 +7,7 @@ var g_ressources = [
 
 
     //plist
-    {src:s_littleHero_plist},
+    {src:s_littleHero_animation},
     
     //fnt
 

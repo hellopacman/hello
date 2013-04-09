@@ -45,6 +45,32 @@ var MyLayer = cc.Layer.extend({
         var animate = cc.Animate.create(animation);
         sprite.runAction(cc.RepeatForever.create(animate));
 
+        // little hero 
+        var littleHeroTexture = cc.TextureCache.getInstance().addImage(s_littleHero_animation);
+        var littleHeroFrameWidth = 48;
+        var littleHeroFrameHeight = 48;
+
+        var littleHeroFrames = [];
+        var frame;
+        for (var j = 0; j < 8; j ++)
+        {        
+            for (var i = 0; i < 3; i ++)
+            {
+
+                frame = cc.SpriteFrame.createWithTexture(littleHeroTexture, cc.rect(littleHeroFrameWidth * i, littleHeroFrameHeight * j, littleHeroFrameWidth, littleHeroFrameHeight));
+                littleHeroFrames.push(frame);
+            }
+        }
+
+        var littleHeroSp = cc.Sprite.createWithSpriteFrame(littleHeroFrames[0]);
+        littleHeroSp.setPosition(cc.p(winSize.width / 2 - 100, winSize.height / 2));
+        this.addChild(littleHeroSp);
+
+        var littleHeroAnimation = cc.Animation.create(littleHeroFrames, 0.15);
+        var littleHeroAnimate = cc.Animate.create(littleHeroAnimation);
+        littleHeroSp.runAction(cc.RepeatForever.create(littleHeroAnimate));
+
+
         return true;
     }
 
