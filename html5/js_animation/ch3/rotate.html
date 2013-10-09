@@ -17,38 +17,6 @@
 </html>
 
 <script>
-
-	var canvas = document.getElementById("canvas");
-	var console = document.getElementById("console");
-
-	window.onload = function()
-	{
-	/*
-		canvas.addEventListener("mousedown", onMouseEvent, false);
-		canvas.addEventListener("mouseup", onMouseEvent, false);
-		canvas.addEventListener("click", onMouseEvent, false);
-		canvas.addEventListener("dblclick", onMouseEvent, false);
-		canvas.addEventListener("mousewheel", onMouseEvent, false);
-		canvas.addEventListener("mousemove", onMouseEvent, false);
-		canvas.addEventListener("mouseover", onMouseEvent, false);
-		canvas.addEventListener("mouseout", onMouseEvent, false);
-	*/
-		//canvas.addEventListener("touchstart", onMouseEvent, false);
-		canvas.addEventListener("touchend", onMouseEvent, false);
-		canvas.addEventListener("touchmove", onMouseEvent, false);
-	}
-	
-	function onMouseEvent(event)
-	{
-		event.preventDefault();
-	
-	 	console.innerHTML = "";
-		for (var elmt in event.touches[0])
-		{
-			 console.innerHTML += elmt + ":" + event.touches[0][elmt] + " ";
-		}
-	}
-	
 	//箭头
 	function Arrow()
 	{
@@ -65,8 +33,94 @@
 		context.rotate(this.rotation);
 		context.lineWidth = 2;
 		context.fillStyle = this.color;
-		
+		context.beginPath();
+		context.moveTo(-50, -25);
+		context.lineTo(0, -25);
+		context.lineTo(0, -50);
+		context.lineTo(50, 0);
+		context.lineTo(0, 50);
+		context.lineTo(0, 25);
+		context.lineTo(-50, 25);
+		context.lineTo(-50, -25);	
+		context.closePath();
+		context.fill();
+		context.stroke();
+		context.restore();
+
+	}
+
+
+	//初始化
+	var canvas = document.getElementById("canvas");
+	var context = canvas.getContext("2d");
+	var console = document.getElementById("console");
+	var mousePos = {x:0, y:0};
+	var arrow = new Arrow();
 	
+	//绘图循环
+	function drawFrame()
+	{
+		window.requestAnimationFrame(drawFrame, canvas);
+		context.clearRect(0, 0, canvas.width, canvas.height);
+		var dx = mousePos.x - arrow.x;
+		var dy = mousePos.y - arrow.y;
+		arrow.rotation = Math.atan2(dy, dx);
+		arrow.draw(context);
+	}
+	
+	
+	//onload
+	window.onload = function()
+	{
+		//箭头定位
+		arrow.x = canvas.width / 2;
+		arrow.y = canvas.height / 2;
+
+		//启动绘图循环
+		drawFrame();
+		
+		//canvas注册交互事件
+		// canvas.addEventListener("mousedown", onMouseEvent, false);
+		// canvas.addEventListener("mouseup", onMouseEvent, false);
+		// canvas.addEventListener("click", onMouseEvent, false);
+		// canvas.addEventListener("dblclick", onMouseEvent, false);
+		// canvas.addEventListener("mousewheel", onMouseEvent, false);
+		canvas.addEventListener("mousemove", onMouseMove, false);
+		// canvas.addEventListener("mouseover", onMouseEvent, false);
+		// canvas.addEventListener("mouseout", onMouseEvent, false);
+		//canvas.addEventListener("touchstart", onMouseEvent, false);
+		//canvas.addEventListener("touchend", onMouseEvent, false);
+		canvas.addEventListener("touchmove", onTouchMove, false);
+	}
+	
+	//鼠标移动事件
+	function onMouseMove(event)
+	{
+		event.preventDefault();
+	
+	 	console.innerHTML = "";
+		mousePos.x = event.pageX - canvas.offsetLeft;
+		mousePos.y = event.pageY - canvas.offsetTop;
+		console.innerHTML = "mouseCanvasX: " + mousePos.x + "mouseCanvasY: " + mousePos.y;
+		// for (var elmt in event)
+		// {
+			 // console.innerHTML += elmt + ":" + event[elmt] + " ";
+		// }
+	}
+	
+	//touch移动事件
+	function onTouchMove(event)
+	{
+		event.preventDefault();
+	
+	 	console.innerHTML = "";
+		mousePos.x = event.touches[0].pageX - canvas.offsetLeft;
+		mousePos.y = event.touches[0].pageY - canvas.offsetTop;
+		console.innerHTML = "touchCanvasX: " + mousePos.x + "touchCanvasY: " + mousePos.y;
+		// for (var elmt in event)
+		// {
+			 // console.innerHTML += elmt + ":" + event[elmt] + " ";
+		// }
 	}
 		
 	
