@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <title>skeleton</title>
+	 <link rel="stylesheet" href="style.css">
+	</head>
+	
+	<body>
+		<canvas id="canvas" width="400" height="400"></canvas>
+		<div id="console">123</div>
+		<div>321</div>
+		
+	</body>
+	
+</html>
+
+<script>
+
+	var canvas = document.getElementById("canvas");
+	var console = document.getElementById("console");
+
+	window.onload = function()
+	{
+	/*
+		canvas.addEventListener("mousedown", onMouseEvent, false);
+		canvas.addEventListener("mouseup", onMouseEvent, false);
+		canvas.addEventListener("click", onMouseEvent, false);
+		canvas.addEventListener("dblclick", onMouseEvent, false);
+		canvas.addEventListener("mousewheel", onMouseEvent, false);
+		canvas.addEventListener("mousemove", onMouseEvent, false);
+		canvas.addEventListener("mouseover", onMouseEvent, false);
+		canvas.addEventListener("mouseout", onMouseEvent, false);
+	*/
+		//canvas.addEventListener("touchstart", onMouseEvent, false);
+		canvas.addEventListener("touchend", onMouseEvent, false);
+		canvas.addEventListener("touchmove", onMouseEvent, false);
+	}
+	
+	function onMouseEvent(event)
+	{
+		event.preventDefault();
+	
+	 	console.innerHTML = "";
+		for (var elmt in event.touches[0])
+		{
+			 console.innerHTML += elmt + ":" + event.touches[0][elmt] + " ";
+		}
+	}
+	
+	//箭头
+	function Arrow()
+	{
+		this.x = 0;
+		this.y = 0;
+		this.rotation = 0;
+		this.color = "#aabbcc";
+	}
+	
+	Arrow.prototype.draw = function(context)
+	{
+		context.save();
+		context.translate(this.x, this.y);
+		context.rotate(this.rotation);
+		context.lineWidth = 2;
+		context.fillStyle = this.color;
+		
+	
+	}
+		
+	
+</script>
